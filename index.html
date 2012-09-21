@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Game Of Life</title>
+		<link rel="stylesheet" href="css/main.css" type="text/css">
+		<script type="text/javascript" src="code/js/user.common.js"></script>
+		<script type="text/javascript" src="code/js/gol.js"></script>
+		<script type="text/javascript" src="code/js/canvas.js"></script>
+		<script type="text/javascript" src="code/js/text.js"></script>
+		<script type="text/javascript" src="code/js/aggregator.js"></script>
+		<script>
+		try{
+			cm.Node('canvas').getContext('2d');
+			['forEach', 'reduce', 'some'].forEach(function(o){
+				if(!Array.prototype.hasOwnProperty(o))
+					throw new Error('Browser');
+			});
+			if(!document.querySelector)
+					throw new Error('Browser');
+			if(!document.addEventListener)
+					throw new Error('Browser');
+			if(!JSON || !JSON.parse)
+				throw new Error('Browser');
+		}catch(e){
+			alert('Ops! For demo purposes this application use Javascript 1.8 features and Canvas api.\n Unfortunately your browser do not support them.\n Please download latest Internet Explorer, Firefox, Chrome, Safari or Opera browser.')
+		}
+		window.addEventListener('load', function(){
+			document.body.appendChild(
+				new Aggregator()
+					.addView(new CanvasView())
+					.addView(new TextView())
+					.addGame(new Gol())
+					.render()
+			);
+		})
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
